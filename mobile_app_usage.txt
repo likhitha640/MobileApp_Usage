@@ -1,0 +1,130 @@
+Top 5 ratings of google play store
+rate_google <- sort(mobileapp31$Google_Average_rating,decreasing = TRUE)
+rate_google
+top_google_rate5<-head(rate_google,5)
+top_google_rate5
+google_rating_graph <- barplot(width = 1,top_google_rate5, main="Top 5 ratings of google play store",xlab="top 5 rating apps",ylab  = "Rating count of apps", col=c("darkblue","red","orange","darkgreen","seagreen"),
+names.arg = c("Facebook","whatsapp","viber","gmail","pandora"))
+
+Top 5 downloads of google play store
+
+rate_download <- sort(mobile$oogle_No.of.Downloads,decreasing = TRUE)
+rate_download
+barplot(top_google_download5, main="Top 5 downloads of google play store",xlab="top 5 downloads apps",ylab  = "downloads count of apps", 
+                  col=c("orange","darkgreen","seagreen","darkblue","red"),names.arg = c("youtube","googleplay","maps","twitter","viber"))
+
+Top 5 revenue of google play store
+
+rate_revenue <- sort(mobileapp31$google_Revenue,decreasing = TRUE)
+ rate_revenue
+top_google_revenue5<-head(rate_revenue,5)
+top_google_revenue5
+
+google_revenue_graph <- barplot(top_google_revenue5, main="Top 5 revenue of google play store",xlab="top 5 revenue apps",
+	ylab  = "revenue count of apps", col=c("blue","red","darkgreen","orange","seagreen"),names.arg = c("whatsapp","facebook","paytm","gmail","twitter"))
+
+
+free vs paid apps in google play store
+> freepaid<-mobile$FREE...free..PAID...paid
+> freepaid1 <- table(freepaid)
+> freepaid1
+ freepaid1 <- table(freepaid)
+ freepaid1 
+  freepaid
+free paid 
+ 431  297
+
+ pie(table(freepaid),main="free vs paid apps in google play store")
+
+
+free vs paid apps in App store
+freepaid_app1<-table(freepaid_app)
+ 
+ freepaid_app1
+freepaid_app
+free paid 
+ 436  292
+
+ pie(table(freepaid_app),main="free vs paid apps in App store")
+
+comparsion of free and paid apps in google and app
+
+ freepaid_app1["free"]
+free 
+ 436 
+ freepaid1["free"]
+free 
+ 431 
+ googlevsapp_free<- c(freepaid1["free"],freepaid_app1["free"])
+ googlevsapp_free
+free free 
+ 431  436
+ barplot(googlevsapp_free,main="free apps",xlab="Comparsion of googleplay and app store",
+                       ylab="No of apps which are free",col=c("darkblue","red"),names.arg=c("google play store","app store"))
+
+
+ googlevsapp_paid1<- c(freepaid1["paid"],freepaid_app1["paid"])
+ googlevsapp_paid1
+paid paid 
+ 297  292 
+ barplot(googlevsapp_paid1,main="free apps",xlab="Comparsion of googleplay and app store",
+                           ylab="No of apps which are free",col=c("darkblue","red"),names.arg=c("google play store","app store"))
+ 
+ 
+ barplot(googlevsapp_paid1,main="paid apps",xlab="Comparsion of googleplay and app store",
+                           ylab="No of apps which are paid",col=c("darkblue","red"),names.arg=c("google play store","app store"))
+ 
+
+Total no of downloadsof googleplay vs app store
+
+ total_app_downloads<-sum(mobile$app_No.of.Downloads)
+ total_google_downloads<-sum(as.numeric(mobile$oogle_No.of.Downloads))
+ total_google_downloads
+[1] 2443836712
+ total_downloads<-c( total_google_downloads,total_app_downloads)
+ total_downloads
+ total_downloads<-c( total_google_downloads,total_app_downloads)
+ total_downloads
+barplot(width = 2,total_downloads, main="Total no of downloadsof googleplay vs app store",xlab="Google & App store",
+      ylab  = "No of downloads", col=c("grey","black"),names.arg = c("Google playstore","Appstore"))
+
+Mobile app usage depending upon age
+
+ x <- cut(mobileapp31$Age, breaks=c(10,20, 30, 40, 50,60,70,80))
+ barplot(table(x),names.arg = c("[10-20]","[20-30]","[30-40]","[40-50]","[50-60]","[60-70]","[70-80]"),
+ col = c("grey","orange","seagreen","lightblue","darkorange","brown","blue"),xlab = "Age Group",ylab="No of members" ,main = "Mobile app usage depending upon age")
+
+
+Correlation of Downloads & Revenue
+
+> cor(mobile$oogle_No.of.Downloads,mobile$google_Revenue)
+[1] 0.6273267
+> plot(mobile$oogle_No.of.Downloads,mobile$google_Revenue)
+> plot(mobile$oogle_No.of.Downloads,mobile$google_Revenue,xlab = "No of downloads",ylab = "Revenue")
+
+Prediction of Revenue vs monthly active users
+
+x<-mobileapp31$Paying.Monthly.Active.Users_and
+y<-mobileapp31$ARPMAU_and
+z<-data.frame(x,y)
+df <- transform(z,n = z$x * z$y)
+df
+monthly_active_users <- df$x
+monthly_active_users
+d<-df$n
+d
+Revenue<-fitted(lm(active_users~d))
+plot( monthly_active_users,Revenue)
+lines(predict(lm(monthly_active_users~d)),col = "red")
+
+
+session 
+
+seesion_ios$Date<-as.Date(seesion_ios$Date, format="%d/%m/%Y")
+ plot(seesion_ios$Date,seesion_ios$Average.Sessions.Per.Daily.User)
+ lines(seesion_ios$Date, seesion_ios$Average.Sessions.Per.Daily.User,type="o")
+
+
+
+
+
